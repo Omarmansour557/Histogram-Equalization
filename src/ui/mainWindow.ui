@@ -31,10 +31,23 @@
        </spacer>
       </item>
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="styleSheet">
+         <string notr="true">font: 63 16pt &quot;URW Bookman&quot;;
+color: rgb(239, 41, 41);
+font: 75 16pt &quot;Ubuntu Condensed&quot;;</string>
+        </property>
+        <property name="text">
+         <string>SBME-APPS</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label">
         <property name="styleSheet">
-         <string notr="true">color: rgb(239, 41, 41);
-font: 75 italic 20pt &quot;Ubuntu Mono&quot;;</string>
+         <string notr="true">
+font: 12pt &quot;Waree&quot;;
+</string>
         </property>
         <property name="text">
          <string>Histogram-Equalization</string>
