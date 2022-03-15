@@ -1,1 +1,1 @@
-# Histogram-Equalization
+# Filter-Studio
