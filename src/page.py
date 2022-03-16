@@ -11,8 +11,12 @@ class Page (qtw.QTabWidget):
         super().__init__()
 
         uic.loadUi("src/ui/page.ui", self)
+
+        
         self.filter_studio = FilterStudio()
         self.equalizer = Equalizer()
+
+
         self.filter_layout.addWidget(self.filter_studio)
         self.equalizer_layout.addWidget(self.equalizer)
 

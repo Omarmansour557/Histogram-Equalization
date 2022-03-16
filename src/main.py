@@ -25,8 +25,9 @@ class MainWindow(qtw.QMainWindow):
 
     @pyqtSlot()
     def Load_image_file(self):
-        image_path,_ = QFileDialog.getOpenFileName(None, 'OpenFile', '', "Image file(*.jpg)")
+        image_path=qtw.QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
         self.page.load_image(image_path)
+        
 
 
 if __name__ == '__main__':

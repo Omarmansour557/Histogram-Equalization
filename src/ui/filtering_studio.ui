@@ -16,39 +16,20 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout" rowstretch="1,20,1,20" columnstretch="20,0,20">
-     <item row="1" column="0">
-      <widget class="QLabel" name="image_viewer">
-       <property name="frameShape">
-        <enum>QFrame::Box</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="lineWidth">
-        <number>4</number>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../defualt.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="Original_image">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Ubuntu Condensed</family>
+         <pointsize>14</pointsize>
+         <weight>9</weight>
+         <italic>true</italic>
+         <bold>false</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(204, 0, 0);
+font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>Original_image</string>
@@ -62,10 +43,16 @@
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Ubuntu Condensed</family>
+         <pointsize>14</pointsize>
+         <weight>9</weight>
+         <italic>true</italic>
+         <bold>false</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(204, 0, 0);
+font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>DFT_Image</string>
@@ -79,10 +66,16 @@
       <widget class="QLabel" name="label_7">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Ubuntu Condensed</family>
+         <pointsize>14</pointsize>
+         <weight>9</weight>
+         <italic>true</italic>
+         <bold>false</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(204, 0, 0);
+font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>Filtered_DFT</string>
@@ -105,88 +98,20 @@
        </property>
       </spacer>
      </item>
-     <item row="3" column="2">
-      <widget class="QLabel" name="filtered_DFT_viewer">
-       <property name="frameShape">
-        <enum>QFrame::Box</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <property name="lineWidth">
-        <number>4</number>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../defualt.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="filtered_Image_viewer">
-       <property name="frameShape">
-        <enum>QFrame::Box</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <property name="lineWidth">
-        <number>4</number>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../defualt.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="DFT_viewer">
-       <property name="frameShape">
-        <enum>QFrame::Box</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <property name="lineWidth">
-        <number>4</number>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../defualt.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="2">
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Ubuntu Condensed</family>
+         <pointsize>14</pointsize>
+         <weight>9</weight>
+         <italic>true</italic>
+         <bold>false</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(204, 0, 0);
+font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </property>
        <property name="text">
         <string>Filtered_Image</string>
@@ -195,6 +120,74 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="image_layout">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <layout class="QVBoxLayout" name="dft_layout">
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="2">
+      <layout class="QVBoxLayout" name="filtered_layout">
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="2">
+      <layout class="QVBoxLayout" name="filtered_dft_layout">
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

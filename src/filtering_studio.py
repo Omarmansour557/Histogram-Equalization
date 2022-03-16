@@ -4,7 +4,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QFileDialog, QPushButton
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import pyqtSlot
-
+from viewer import Viewer
 import cv2
 class FilterStudio (qtw.QWidget):
     def __init__(self):
@@ -13,31 +13,33 @@ class FilterStudio (qtw.QWidget):
         uic.loadUi("src/ui/filtering_studio.ui",self)
 
         self.load_btn.clicked.connect(self.load_original_image)
+        self.original_image = Viewer()
+        self.image_layout.addWidget(self.original_image)
+
+
+        self.filtered_image = Viewer()
+        self.filtered_layout.addWidget(self.filtered_image)
+
+
+        self.dft_image = Viewer()
+        self.dft_layout.addWidget(self.dft_image)
+
+
+        self.filtered_dft = Viewer()
+        self.filtered_dft_layout.addWidget(self.filtered_dft)
+
+
         self.image_path = None
 
 
-
-
-    # @pyqtSlot()
-    # def displayImage(self):
-    #     print('PyQt5 button click')
-    #     self.image_path,_ = QFileDialog.getOpenFileName(None, 'OpenFile', '', "Image file(*.jpg)")
-    #     pixmap = QPixmap(self.image_path)
-    #     self.image_viewer.setPixmap(pixmap)
-    #     self.label.setScaledContents(True);
-    #     read_img = cv2.imread(self.image_path, cv2.IMREAD_COLOR)
-    #     print(type(read_img))
 
 
     def load_original_image(self, image_path):
         pixmap = QPixmap(image_path)
         self.image_viewer.setPixmap(pixmap)
         self.label.setScaledContents(True);
-        # read_img = cv2.imread(self.image_path, cv2.IMREAD_COLOR)
+       
        
 
-    # @pyqtSlot()
-    # def filteredImage(self):
-    #     read_img = cv2.imread(image[0], cv2.IMREAD_COLOR)
-
+   
 
