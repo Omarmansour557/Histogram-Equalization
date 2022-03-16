@@ -12,7 +12,7 @@ class FilterStudio (qtw.QWidget):
         
         uic.loadUi("src/ui/filtering_studio.ui",self)
 
-        self.load_btn.clicked.connect(self.load_original_image)
+        
         self.original_image = Viewer()
         self.image_layout.addWidget(self.original_image)
 
@@ -28,18 +28,42 @@ class FilterStudio (qtw.QWidget):
         self.filtered_dft = Viewer()
         self.filtered_dft_layout.addWidget(self.filtered_dft)
 
+        self.filters_list.currentIndexChanged.connect(self.selectionchange)
+
 
         self.image_path = None
 
+    def selectionChange(self, filter_index):
+        if(filter_index == 0):
+            self.apply_low_pass_filter()
+
+        elif filter_index == 1:
+            self.apply_high_pass_filter() 
+
+        elif filter_index == 2:
+            self.apply_median_pass_filter()     
+        else:
+            self.apply_laplacian_filter()   
 
 
 
     def load_original_image(self, image_path):
-        pixmap = QPixmap(image_path)
-        self.image_viewer.setPixmap(pixmap)
-        self.label.setScaledContents(True);
+        self.image_path = image_path
        
+        
+    def apply_low_pass_filter(self):
+        ## apply low pass filter --> gamel's mission
+        pass  
        
 
-   
+    def apply_high_pass_filter(self):
+         ## apply high pass filter --> saied's mission
+        pass
 
+    def apply_median_pass_filter(self) :
+         ## apply median  filter --> omar's mission
+        pass
+
+    def apply_laplacian_filter(self):
+        ## apply laplacian filter --> Anas's mission
+        pass

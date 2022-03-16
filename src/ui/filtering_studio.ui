@@ -16,29 +16,6 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout" rowstretch="1,20,1,20" columnstretch="20,0,20">
-     <item row="0" column="0">
-      <widget class="QLabel" name="Original_image">
-       <property name="font">
-        <font>
-         <family>Ubuntu Condensed</family>
-         <pointsize>14</pointsize>
-         <weight>9</weight>
-         <italic>true</italic>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(204, 0, 0);
-font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Original_image</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="font">
@@ -61,42 +38,6 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_7">
-       <property name="font">
-        <font>
-         <family>Ubuntu Condensed</family>
-         <pointsize>14</pointsize>
-         <weight>9</weight>
-         <italic>true</italic>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(204, 0, 0);
-font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Filtered_DFT</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item row="0" column="2">
       <widget class="QLabel" name="label">
@@ -121,10 +62,10 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <layout class="QVBoxLayout" name="image_layout">
+     <item row="3" column="0">
+      <layout class="QVBoxLayout" name="dft_layout">
        <item>
-        <spacer name="verticalSpacer">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -138,10 +79,10 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </item>
       </layout>
      </item>
-     <item row="3" column="0">
-      <layout class="QVBoxLayout" name="dft_layout">
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="image_layout">
        <item>
-        <spacer name="verticalSpacer_2">
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -172,6 +113,65 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
        </item>
       </layout>
      </item>
+     <item row="1" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="Original_image">
+       <property name="font">
+        <font>
+         <family>Ubuntu Condensed</family>
+         <pointsize>14</pointsize>
+         <weight>9</weight>
+         <italic>true</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(204, 0, 0);
+font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Original_image</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <family>Ubuntu Condensed</family>
+         <pointsize>14</pointsize>
+         <weight>9</weight>
+         <italic>true</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(204, 0, 0);
+font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Filtered_DFT</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="3" column="2">
       <layout class="QVBoxLayout" name="filtered_dft_layout">
        <item>
@@ -191,17 +191,16 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
      </item>
     </layout>
    </item>
-   <item row="0" column="0">
-    <widget class="QPushButton" name="load_btn">
-     <property name="text">
-      <string>Open</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
+   <item row="2" column="0">
     <widget class="QComboBox" name="filters_list">
      <property name="enabled">
       <bool>true</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>0</height>
+      </size>
      </property>
      <property name="tabletTracking">
       <bool>false</bool>
@@ -236,6 +235,19 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
       </property>
      </item>
     </widget>
+   </item>
+   <item row="2" column="1">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

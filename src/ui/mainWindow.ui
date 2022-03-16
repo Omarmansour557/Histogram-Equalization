@@ -85,15 +85,11 @@ font: 12pt &quot;Waree&quot;;
      <string>File</string>
     </property>
     <addaction name="browse_action"/>
-    <addaction name="actionsave"/>
-    <addaction name="actionsave_as"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actioncopy"/>
-    <addaction name="actionpaste"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
