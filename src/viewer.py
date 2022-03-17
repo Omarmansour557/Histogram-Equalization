@@ -22,8 +22,13 @@ class Viewer(FigureCanvas):
         # self.cmap = plt.get_cmap('inferno')
 
     def draw_image(self,img):
-        self.axes.imshow(img)
+        self.axes.imshow(img, cmap='gray')
         self.draw()
+
+        
+
+    
+
 
     def update_image(self, img):
         self.axes.imshow(img)
@@ -35,4 +40,4 @@ class Viewer(FigureCanvas):
         self.draw()
 
     def draw_histogram(self, img):
-        pass 
+        self.axes.hist(img, bins=20)

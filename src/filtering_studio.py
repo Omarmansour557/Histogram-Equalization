@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import pyqtSlot
 from viewer import Viewer
 import cv2
+import numpy as np
 class FilterStudio (qtw.QWidget):
     def __init__(self):
         super().__init__()
@@ -15,6 +16,7 @@ class FilterStudio (qtw.QWidget):
         
         self.original_image = Viewer()
         self.image_layout.addWidget(self.original_image)
+        
 
 
         self.filtered_image = Viewer()
@@ -28,7 +30,7 @@ class FilterStudio (qtw.QWidget):
         self.filtered_dft = Viewer()
         self.filtered_dft_layout.addWidget(self.filtered_dft)
 
-        self.filters_list.currentIndexChanged.connect(self.selectionchange)
+        self.filters_list.currentIndexChanged.connect(self.selectionChange)
 
 
         self.image_path = None
@@ -49,6 +51,8 @@ class FilterStudio (qtw.QWidget):
 
     def load_original_image(self, image_path):
         self.image_path = image_path
+        self.img = cv2.imread(self.image_path, cv2.IMREAD_GRAYSCALE)
+        self.original_image.draw_image(self.img)
        
         
     def apply_low_pass_filter(self):
@@ -61,8 +65,27 @@ class FilterStudio (qtw.QWidget):
         pass
 
     def apply_median_pass_filter(self) :
+        
          ## apply median  filter --> omar's mission
-        pass
+        self.img = cv2.imread(self.image_path, cv2.IMREAD_GRAYSCALE)
+        medianfilter_image = cv2.medianBlur(self.img, 3)
+        self.filtered_image.draw_image(medianfilter_image)
+        
+        ## draw fft of image 
+        f = np.fft.fft2(self.img)
+        fshift = np.fft.fftshift(f)
+        magnitude_spectrum = 20*np.log(np.abs(fshift))
+        self.dft_image.draw_image(magnitude_spectrum)
+
+
+
+        # draw filtered fft
+        f = np.fft.fft2(medianfilter_image)
+        f_filter_shift = np.fft.fftshift(f)
+        magnitude_spectrum_filter = 20*np.log(np.abs(f_filter_shift))
+        self.filtered_dft.draw_image( magnitude_spectrum_filter)
+
+       
 
     def apply_laplacian_filter(self):
         ## apply laplacian filter --> Anas's mission

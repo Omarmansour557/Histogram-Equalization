@@ -17,9 +17,11 @@ class Equalizer(qtw.QWidget):
         
         uic.loadUi("src/ui/equalization.ui", self)
 
-        # self.equalizer_btn.clicked.connect(self.view_equalized_image)
+        self.img = [[]]
+        self.equalized_image = [[]]
 
         self.image_viewer = Viewer()
+        
         self.image_layout.addWidget(self.image_viewer)
 
         self.equalized_viewer = Viewer()
@@ -35,20 +37,18 @@ class Equalizer(qtw.QWidget):
 
 
 
-        self.equalized_image_pixmap =  None
-        self.original_image_pixmap  =  None
-        self.equalized_image_path   = None
+        
 
         
 
 
     def load_original_image(self, image_path):
        
-        img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-        _, indices, counts = np.unique(img, return_counts=True, return_inverse=True)
-
+        self.img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        _, indices, counts = np.unique(self.img, return_counts=True, return_inverse=True)
+        
         # equalization factor: pixel depth divided by number of pixels of image.
-        equalization_factor = 2**8/(img.shape[0]*img.shape[1])
+        equalization_factor = 2**8/(self.img.shape[0]*self.img.shape[1])
         
         auxillary_var = 0
         commulative_density_function = []   
@@ -68,25 +68,30 @@ class Equalizer(qtw.QWidget):
         image_1D = image_1D[indices]
 
         # to return to original image
-        equalized_image = np.reshape(image_1D, (img.shape[0],img.shape[1]))
+        self.equalized_image = np.reshape(image_1D, (self.img.shape[0],self.img.shape[1]))
+        
+        
 
-        # saving image because we need the path to view it in label
-        cv2.imwrite('src/equalizedImage.jpg', equalized_image)
-        self.equalized_image_path = 'src/equalizedImage.jpg'
+        self.view_equalized_image()
+        # self.view_equalized_histogram()
+        self.view_original_image()
+        # self.view_histogram()
+        
+    def view_original_image(self):
+        self.image_viewer.draw_image(self.img)
+
+    def view_equalized_image(self):
+        self.equalized_viewer.draw_image(self.equalized_image)
+
+    def view_histogram(self):
+        self.histogram_viewer.draw_histogram(self.img)
+
+    def view_equalized_histogram(self):
+        self.equalized_histogram.draw_histogram(self.equalized_image)
+        
 
         
 
-        # view equalized image
-        # self.original_image_pixmap = QPixmap(image_path)
-        # self.image_view.setPixmap(self.original_image_pixmap)
-        # self.image_view.setScaledContents(True)
-
-
-    # def view_equalized_image(self):
-    #     # view original image
-    #     self.equalized_image_pixmap = QPixmap(self.equalized_image_path)
-    #     self.equalization_view.setPixmap(self.equalized_image_pixmap)
-    #     self.equalization_view.setScaledContents(True)
 
 
 
