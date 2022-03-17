@@ -135,6 +135,13 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="equalizer_btn">
          <property name="text">
           <string>Apply Equalization</string>

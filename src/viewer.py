@@ -13,16 +13,15 @@ class Viewer(FigureCanvas):
     def __init__(self, parent=None, width=0.1, height=0.01, dpi=100):
         self.fig = Figure()
         super().__init__(self.fig) 
-        self.axes = self.fig.add_subplot(111)
+        self.axes = self.fig.add_axes([0,0,1,1])
         for spine in ['right', 'top', 'left', 'bottom']:
             self.axes.spines[spine].set_color('gray')
-        # self.axes.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)
-        # self.fig.tight_layout()
+       
         self.axes.axis('off')
-        # self.cmap = plt.get_cmap('inferno')
+     
 
     def draw_image(self,img):
-        self.axes.imshow(img, cmap='gray')
+        self.axes.imshow(img, cmap='gray', aspect='auto')
         self.draw()
 
         
@@ -30,7 +29,7 @@ class Viewer(FigureCanvas):
     
 
 
-    def update_image(self, img):
+    def update_image(self, img, aspect='auto'):
         self.axes.imshow(img)
         self.draw()
 
@@ -39,5 +38,5 @@ class Viewer(FigureCanvas):
         self.axes.clear()
         self.draw()
 
-    def draw_histogram(self, img):
-        self.axes.hist(img, bins=20)
+    def draw_histogram(self, img, aspect='auto'):
+        self.axes.hist(img, bins=4)

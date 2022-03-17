@@ -30,7 +30,7 @@ class FilterStudio (qtw.QWidget):
         self.filtered_dft = Viewer()
         self.filtered_dft_layout.addWidget(self.filtered_dft)
 
-        self.filters_list.currentIndexChanged.connect(self.selectionChange)
+        self.filters_list.activated.connect(lambda:self.selectionchange(self.filters_list.currentIndex()))
 
 
         self.image_path = None

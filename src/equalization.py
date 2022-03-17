@@ -35,48 +35,53 @@ class Equalizer(qtw.QWidget):
         self.equalized_histogram = Viewer()
         self.equalized_histogram_layout.addWidget(self.equalized_histogram)
 
-
-
-        
-
-        
-
+        self.equalizer_btn.clicked.connect(self.equalization)
+        # self.pushButton.clicked.connect(self.view_equalized_histogram)
 
     def load_original_image(self, image_path):
        
         self.img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        # self.view_equalized_histogram()
+        self.view_original_image()
+        # self.view_histogram()
+
+        
+        
+
+       
+        
+    def equalization(self):
         _, indices, counts = np.unique(self.img, return_counts=True, return_inverse=True)
         
         # equalization factor: pixel depth divided by number of pixels of image.
         equalization_factor = 2**8/(self.img.shape[0]*self.img.shape[1])
         
-        auxillary_var = 0
+       
         commulative_density_function = []   
 
         # to calculate commulative density function (cdf)
-        for i in range(256):
-            commulative_density_function.append(counts[i] + auxillary_var)
-            auxillary_var = commulative_density_function[i]
+        commulative_density_function = np.cumsum(counts)
 
-        Sx = [i*equalization_factor-1 for i in commulative_density_function]
+        Sx = commulative_density_function*equalization_factor-1
+
+        
 
         # after equalization --> pixels intensity may have float number ---> this reason for calculate ceiling of number
-        Sx = [math.ceil(x) for x in Sx]
-        image_1D = np.array(Sx)
+        Sx = np.ceil(Sx)
+      
+        image_1D = Sx
 
         # to reverse the origin 1d array after equalization
         image_1D = image_1D[indices]
 
         # to return to original image
         self.equalized_image = np.reshape(image_1D, (self.img.shape[0],self.img.shape[1]))
-        
-        
 
         self.view_equalized_image()
-        # self.view_equalized_histogram()
-        self.view_original_image()
-        # self.view_histogram()
         
+      
+        
+
     def view_original_image(self):
         self.image_viewer.draw_image(self.img)
 
@@ -87,6 +92,7 @@ class Equalizer(qtw.QWidget):
         self.histogram_viewer.draw_histogram(self.img)
 
     def view_equalized_histogram(self):
+        print(self.equalized_image)
         self.equalized_histogram.draw_histogram(self.equalized_image)
         
 
