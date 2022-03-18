@@ -36,7 +36,7 @@ class Equalizer(qtw.QWidget):
         self.equalized_histogram_layout.addWidget(self.equalized_histogram)
 
         # self.equalizer_btn.clicked.connect(self.equalization)
-        self.pushButton.clicked.connect(self.view_equalized_histogram)
+        # self.pushButton.clicked.connect(self.view_equalized_histogram)
 
     def load_original_image(self, image_path):
        
@@ -47,10 +47,10 @@ class Equalizer(qtw.QWidget):
         
         
      
-    def view_equalized_histogram(self):
-        self.view_equalized_image()
+    # def view_equalized_histogram(self):
+    #     self.view_equalized_image()
 
-        self.view_histogram(self.img)
+    #     self.view_histogram(self.img)
 
         
         

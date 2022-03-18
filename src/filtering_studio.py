@@ -39,9 +39,9 @@ class FilterStudio (qtw.QWidget):
 
     def flag_change(self,mode_index ):
         self.flag = mode_index
-        print(self.flag)
+        # print(self.flag)
         self.selectionChange(self.filters_list.currentIndex())
-        print(self.filters_list.currentIndex())
+        # print(self.filters_list.currentIndex())
 
 
 
@@ -86,6 +86,10 @@ class FilterStudio (qtw.QWidget):
 
     
     def apply_low_pass_filter(self):
+
+        # split in two functions 
+
+
         img = cv2.imread(self.image_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         
@@ -97,21 +101,32 @@ class FilterStudio (qtw.QWidget):
             img=img[:,:,2]
 
 
-        dft = np.fft.fft2(img, axes=(0,1))
+        dft = np.fft.fft2(img, axes=(0,1)) # -------- remove
         dft_shift = np.fft.fftshift(dft)
-        radius = 32
+
+
+        radius = 32 # --------ratio from image 
         mask = np.zeros_like(img)
+
         cy = mask.shape[0] // 2
         cx = mask.shape[1] // 2
-        cv2.circle(mask, (cx,cy), radius, (255,255,255), -1)[0]
+
+        cv2.circle(mask, (cx,cy), radius, (255,255,255), -1)[0] # remove [0]
+
         dft_shift_masked = np.multiply(dft_shift,mask) / 255
+
         dft_shift_masked_scaled=20*np.log(np.abs(dft_shift_masked)+1)
+
         back_ishift_masked = np.fft.ifftshift(dft_shift_masked)
+
         img_filtered = np.fft.ifft2(back_ishift_masked, axes=(0,1))
-        img_filtered = np.abs(img_filtered).clip(0,255).astype(np.uint8)
+
+        img_filtered = np.abs(img_filtered).clip(0,255).astype(np.uint8) ## normalize
 
         if(self.flag == 1):
-            img_filtered=np.transpose([tem[:,:,0].T, tem[:,:,1].T, img_filtered.T])
+            # using dstack to concatenate three channel (h,s,v)
+            img_filtered = np.dstack((tem[:,:,0], tem[:,:,1], img_filtered))
+            # img_filtered=np.transpose([tem[:,:,0].T, tem[:,:,1].T, img_filtered.T])
             img_filtered=cv2.cvtColor(img_filtered,cv2.COLOR_HSV2RGB)
 
         
@@ -128,6 +143,7 @@ class FilterStudio (qtw.QWidget):
         dft = np.fft.fft2(img)
         dft_shift = np.fft.fftshift(dft)
         dft_shifted_scaled = 20*np.log(np.abs(dft_shift)+1) 
+
         self.dft_image.draw_image(dft_shifted_scaled)   
 
     def apply_high_pass_filter(self):
