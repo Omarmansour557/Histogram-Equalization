@@ -29,7 +29,7 @@ class Viewer(FigureCanvas):
     
 
 
-    def update_image(self, img, aspect='auto'):
+    def update_image(self, img):
         self.axes.imshow(img)
         self.draw()
 
@@ -38,5 +38,6 @@ class Viewer(FigureCanvas):
         self.axes.clear()
         self.draw()
 
-    def draw_histogram(self, img, aspect='auto'):
-        self.axes.hist(img, bins=4)
+    def draw_histogram(self, img):
+        print("*******************")
+        self.axes.hist(img, bins=20)
