@@ -33,9 +33,9 @@
       <item>
        <widget class="QLabel" name="label_2">
         <property name="styleSheet">
-         <string notr="true">font: 63 16pt &quot;URW Bookman&quot;;
+         <string notr="true">font: 75 italic 16pt &quot;Ubuntu Condensed&quot;;
 color: rgb(239, 41, 41);
-font: 75 16pt &quot;Ubuntu Condensed&quot;;</string>
+</string>
         </property>
         <property name="text">
          <string>SBME-APPS</string>
@@ -45,12 +45,11 @@ font: 75 16pt &quot;Ubuntu Condensed&quot;;</string>
       <item>
        <widget class="QLabel" name="label">
         <property name="styleSheet">
-         <string notr="true">
-font: 12pt &quot;Waree&quot;;
+         <string notr="true">font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;
 </string>
         </property>
         <property name="text">
-         <string>Histogram-Equalization</string>
+         <string>Filtering&amp;Equalization</string>
         </property>
        </widget>
       </item>

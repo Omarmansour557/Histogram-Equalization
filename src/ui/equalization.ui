@@ -23,8 +23,9 @@
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_2">
            <property name="styleSheet">
-            <string notr="true">color: rgb(204, 0, 0);
-font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
+            <string notr="true">
+font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;
+color: rgb(204, 0, 0);</string>
            </property>
            <property name="text">
             <string>Equalized Image</string>
@@ -51,8 +52,9 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_4">
            <property name="styleSheet">
-            <string notr="true">color: rgb(204, 0, 0);
-font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
+            <string notr="true">color:rgb(78, 154, 6);
+
+font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
            </property>
            <property name="text">
             <string>Equalized Histogram</string>
@@ -79,8 +81,8 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label">
            <property name="styleSheet">
-            <string notr="true">color: rgb(204, 0, 0);
-font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
+            <string notr="true">font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;
+</string>
            </property>
            <property name="text">
             <string>Original Image</string>
@@ -107,8 +109,8 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_3">
            <property name="styleSheet">
-            <string notr="true">color: rgb(204, 0, 0);
-font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
+            <string notr="true">color:rgb(78, 154, 6);
+font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
            </property>
            <property name="text">
             <string>Histogram</string>
@@ -133,18 +135,30 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="histogram_btn">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(78, 154, 6);</string>
+         </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Show Histogram</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="equalizer_btn">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(204, 0, 0);</string>
+         </property>
          <property name="text">
-          <string>Apply Equalization</string>
+          <string>Show Equalization</string>
          </property>
         </widget>
        </item>

@@ -3,14 +3,14 @@ from PyQt5 import QtCore as qtc
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import uic
 
-from New_FIltering_studio import FilterStudio
+from filtering_studio import FilterStudio
 from equalization import Equalizer
 
 class Page (qtw.QTabWidget):
     def __init__ (self):
         super().__init__()
 
-        uic.loadUi("ui/page.ui", self)
+        uic.loadUi("src/ui/page.ui", self)
 
         
         self.filter_studio = FilterStudio()
