@@ -12,7 +12,7 @@ class FilterStudio (qtw.QWidget):
     def __init__(self):
         super().__init__()
         
-        uic.loadUi("src/ui/filtering_studio.ui",self)
+        uic.loadUi("ui/filtering_studio.ui",self)
 
         
         self.original_image = Viewer()
@@ -30,15 +30,16 @@ class FilterStudio (qtw.QWidget):
 
         self.filtered_dft = Viewer()
         self.filtered_dft_layout.addWidget(self.filtered_dft)
-
+        self.MODES = ['GRAY','RGB']
         self.filters_list.activated.connect(lambda:self.selectionChange(self.filters_list.currentIndex()))
         self.modes_list.activated.connect(lambda:self.flag_change(self.modes_list.currentIndex()))
-        self.flag = 0
+        self.mode = "gray"
         self.image_path = None
+        self.img=None
 
 
     def flag_change(self,mode_index ):
-        self.flag = mode_index
+        self.mode = self.MODES[mode_index]
         # print(self.flag)
         self.selectionChange(self.filters_list.currentIndex())
         # print(self.filters_list.currentIndex())
@@ -71,17 +72,18 @@ class FilterStudio (qtw.QWidget):
     def load_original_image(self, image_path):
         self.image_path = image_path
         self.img = cv2.imread(self.image_path, cv2.IMREAD_GRAYSCALE)
+        self.img2=cv2.imread(self.image_path, cv2.IMREAD_GRAYSCALE)
         self.original_image.draw_image(self.img)
         image=cv2.imread(image_path)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  
+        self.RGB_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
         if(len(image.shape)==2):
                 image =rgb2gray(image)*255
 
         # image = cv2.resize(image, (100, 540))                # Resize image
 
-        self.original_image.draw_image(image)
-        self.to_dft()
+        self.original_image.draw_image(self.RGB_image)
+        # self.to_dft()
         self.selectionChange(self.filters_list.currentIndex())
 
     
@@ -92,9 +94,10 @@ class FilterStudio (qtw.QWidget):
 
         img = cv2.imread(self.image_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        
-        if(self.flag == 0):
+
+        if(self.mode =='GRAY'):
             img =rgb2gray(img)*255
+            print("ttttttttttttttttttttttttt")
         else:
             img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
             tem=img
@@ -105,7 +108,7 @@ class FilterStudio (qtw.QWidget):
         dft_shift = np.fft.fftshift(dft)
 
 
-        radius = 32 # --------ratio from image 
+        radius = 30 # --------ratio from image
         mask = np.zeros_like(img)
 
         cy = mask.shape[0] // 2
@@ -123,16 +126,16 @@ class FilterStudio (qtw.QWidget):
 
         img_filtered = np.abs(img_filtered).clip(0,255).astype(np.uint8) ## normalize
 
-        if(self.flag == 1):
+        if(self.mode == 'RGB'):
             # using dstack to concatenate three channel (h,s,v)
             img_filtered = np.dstack((tem[:,:,0], tem[:,:,1], img_filtered))
             # img_filtered=np.transpose([tem[:,:,0].T, tem[:,:,1].T, img_filtered.T])
             img_filtered=cv2.cvtColor(img_filtered,cv2.COLOR_HSV2RGB)
 
-        
 
 
-        self.filtered_image.draw_image(img_filtered) 
+
+        self.filtered_image.draw_image(img_filtered)
         self.filtered_dft.draw_image(dft_shift_masked_scaled)
 
 
@@ -147,8 +150,48 @@ class FilterStudio (qtw.QWidget):
         self.dft_image.draw_image(dft_shifted_scaled)   
 
     def apply_high_pass_filter(self):
-         ## apply high pass filter --> saied's mission
-        pass
+
+        img = self.RGB_image.copy()
+        if(self.mode =='GRAY'):
+            img =rgb2gray(img)*255
+            print(img.shape)
+        else:
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+            tem=img
+            img=img[:,:,2]
+
+        gray_img = img
+        dft = np.fft.fft2(gray_img, axes=(0, 1))
+        dft_shift = np.fft.fftshift(dft)
+        radius = 30
+        mask = np.zeros_like(gray_img)
+        cy = mask.shape[0] // 2
+        cx = mask.shape[1] // 2
+        cv2.circle(mask, (cx, cy), radius, (255, 255, 255), -1)[0]
+
+        mask = 255 - mask
+
+        dft_shift_masked = np.multiply(dft_shift, mask)
+
+        dft_shift_masked_scaled =np.log(np.abs(dft_shift_masked)+1).astype(np.uint8)
+
+        back_ishift_masked = np.fft.ifftshift(dft_shift_masked)
+        img_filtered = np.fft.ifft2(back_ishift_masked, axes=(0, 1))
+        img_filtered = np.abs(img_filtered)
+        dft_shift= 20*np.log(np.abs(dft_shift)+1)
+
+        if (self.mode == 'RGB'):
+            # using dstack to concatenate three channel (h,s,v)
+            print('img_filtered',img_filtered.shape)
+            img_filtered = np.dstack((tem[:, :, 0], tem[:, :, 1], img_filtered))
+            # img_filtered=np.transpose([tem[:,:,0].T, tem[:,:,1].T, img_filtered.T])
+            img_filtered = cv2.cvtColor(img_filtered, cv2.COLOR_HSV2RGB)
+
+        self.dft_image.clear_canvans()
+        self.dft_image.draw_image(dft_shift)
+        self.filtered_dft.clear_canvans()
+        self.filtered_dft.draw_image(dft_shift_masked_scaled)
+        self.filtered_image.draw_image(img_filtered)
 
     def apply_median_pass_filter(self) :
         
