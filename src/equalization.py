@@ -15,7 +15,7 @@ class Equalizer(qtw.QWidget):
     def __init__(self):
         super().__init__()
         
-        uic.loadUi("src/ui/equalization.ui", self)
+        uic.loadUi("ui/equalization.ui", self)
 
         self.img = [[]]
         self.equalized_image = [[]]
@@ -35,7 +35,7 @@ class Equalizer(qtw.QWidget):
         self.equalized_histogram = Viewer()
         self.equalized_histogram_layout.addWidget(self.equalized_histogram)
 
-        # self.equalizer_btn.clicked.connect(self.equalization)
+        self.equalizer_btn.clicked.connect(self.equalization)
         # self.pushButton.clicked.connect(self.view_equalized_histogram)
 
     def load_original_image(self, image_path):
@@ -52,11 +52,6 @@ class Equalizer(qtw.QWidget):
 
     #     self.view_histogram(self.img)
 
-        
-        
-
-       
-        
     def equalization(self):
         _, indices, counts = np.unique(self.img, return_counts=True, return_inverse=True)
         
@@ -85,7 +80,9 @@ class Equalizer(qtw.QWidget):
         self.equalized_image = np.reshape(image_1D, (self.img.shape[0],self.img.shape[1]))
 
         
+        self.view_histogram(self.img,self.equalized_image)
         # self.view_equalized_histogram(self.equalized_image)
+        self.view_equalized_image()
         
       
         
@@ -96,13 +93,15 @@ class Equalizer(qtw.QWidget):
     def view_equalized_image(self):
         self.equalized_viewer.draw_image(self.equalized_image)
 
-    def view_histogram(self, img):
+    def view_histogram(self, img,equalized_img):
         print("-----------")
         self.histogram_viewer.clear_canvans()
         self.histogram_viewer.draw_histogram(img)
+        self.equalized_histogram.draw_histogram(equalized_img)
 
+    #
     # def view_equalized_histogram(self, img):
-        
+    #
     #     self.equalized_histogram.draw_histogram(img)
         
 
