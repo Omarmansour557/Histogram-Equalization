@@ -14,7 +14,7 @@ class MainWindow(qtw.QMainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi("src/ui/mainWindow.ui", self)
+        uic.loadUi("ui/mainWindow.ui", self)
         self.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='pyqt5'))
         self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
         self.page = Page()

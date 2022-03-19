@@ -231,7 +231,7 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
      </item>
      <item>
       <property name="text">
-       <string>LaPlacian</string>
+       <string>Laplacian</string>
       </property>
      </item>
     </widget>
@@ -240,12 +240,12 @@ font: 75 italic 14pt &quot;Ubuntu Condensed&quot;;</string>
     <widget class="QComboBox" name="modes_list">
      <item>
       <property name="text">
-       <string>gray_scale_mode</string>
+       <string>gray</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>rgb_scale_mode</string>
+       <string>RGB</string>
       </property>
      </item>
     </widget>
