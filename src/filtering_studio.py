@@ -20,16 +20,23 @@ class FilterStudio(qtw.QWidget):
         self.dft_layout.addWidget(self.dft_image)
         self.filtered_dft = Viewer()
         self.filtered_dft_layout.addWidget(self.filtered_dft)
+        self.kernal_viewer = Viewer()
+
 
 
         self.Image_mode = "gray"
         self.filters_list.activated.connect(self.image_transformation)
         self.modes_list.activated.connect(self.image_transformation)
 
+        self.kernal_btn.clicked.connect(self.apply_kernal)
+        # self.kernal_spinbox.valueChanged.connect(self.make_kernal)
+
         self.original_img = None
         self.HSV_img = None
         self.dft_gray = None
         self.dft_RGB = None
+        self.image_size=None
+        self.kernal_size=None
 
     def load_original_image(self, image_path):
 
@@ -40,7 +47,7 @@ class FilterStudio(qtw.QWidget):
         self.init_dft_gray(self.original_img)
         self.init_dft_RGB(self.original_img)
         self.image_transformation()
-
+        self.image_size=BGR_img.shape[:-1]
     def init_dft_gray(self, rgb_img):
         gray_img = cv2.cvtColor(rgb_img, cv2.COLOR_BGR2GRAY)
         dft_img = fft2(gray_img)
@@ -71,7 +78,7 @@ class FilterStudio(qtw.QWidget):
 
         if MODE == 'GRAY':
 
-            radius = 30  # --------ratio from image
+            radius = self.kernal_spinbox.value()  # --------ratio from image
             mask = np.zeros(self.dft_gray.shape)
 
 
@@ -93,7 +100,7 @@ class FilterStudio(qtw.QWidget):
 
 
         else:
-            radius = 30  # --------ratio from image
+            radius = self.kernal_spinbox.value()  # --------ratio from image
             mask = np.zeros(self.dft_RGB.shape)
 
             cy = mask.shape[0] // 2
@@ -116,7 +123,7 @@ class FilterStudio(qtw.QWidget):
     def apply_high_pass_filter(self, MODE):
         if MODE == 'GRAY':
 
-            radius = 30  # --------ratio from image
+            radius = self.kernal_spinbox.value()  # --------ratio from image
             mask = np.ones(self.dft_gray.shape)
             print('applay lowpass:', mask)
 
@@ -140,7 +147,7 @@ class FilterStudio(qtw.QWidget):
 
 
         else:
-            radius = 30  # --------ratio from image
+            radius = self.kernal_spinbox.value()  # --------ratio from image
             mask = np.ones(self.dft_RGB.shape)
 
             cy = mask.shape[0] // 2
@@ -158,37 +165,36 @@ class FilterStudio(qtw.QWidget):
 
             img_filtered = cv2.cvtColor(img_filtered, cv2.COLOR_HSV2RGB)
             print('applay highpass RGB:')
-
             self.draw(dft_spectrum, filterd_dft, self.original_img, img_filtered)
 
     def apply_median_pass_filter(self, MODE):
-
+        kernal =self.kernal_spinbox.value()
+        kernal = kernal if kernal%2==1 else kernal-1
         if MODE == 'GRAY':
 
             gray_img= cv2.cvtColor(self.original_img, cv2.COLOR_BGR2GRAY)
-            medianfilter_image = cv2.medianBlur(gray_img, 3)
+            medianfilter_image = cv2.medianBlur(gray_img, kernal)
 
             ## draw fft of image
             dft_img= np.fft.fft2(gray_img)
             dft_img = np.fft.fftshift(dft_img)
             magnitude_spectrum = 20 * np.log(np.abs(dft_img))
-
-
             # draw filtered fft
             filterd_dft = np.fft.fft2(medianfilter_image)
             filterd_dft = np.fft.fftshift(filterd_dft)
             magnitude_spectrum_filter = 20 * np.log(np.abs(filterd_dft))
+            self.draw(magnitude_spectrum, magnitude_spectrum_filter, self.original_img, medianfilter_image)
 
-            self.dft_image.draw_image(magnitude_spectrum)
-            self.filtered_image.draw_image(medianfilter_image)
-            self.filtered_dft.draw_image(magnitude_spectrum_filter)
+            # self.dft_image.draw_image(magnitude_spectrum)
+            # self.filtered_image.draw_image(medianfilter_image)
+            # self.filtered_dft.draw_image(magnitude_spectrum_filter)
         else:
             HSV_img = cv2.cvtColor(self.original_img, cv2.COLOR_RGB2HSV)
             dft_img = np.fft.fft2(HSV_img[:,:,-1])
             dft_img = np.fft.fftshift(dft_img)
             magnitude_spectrum = 20 * np.log(np.abs(dft_img))
 
-            medianfilter_image = cv2.medianBlur(HSV_img, 3)
+            medianfilter_image = cv2.medianBlur(HSV_img, kernal)
             filterd_dft = np.fft.fft2(medianfilter_image[:,:,-1])
             filterd_dft = np.fft.fftshift(filterd_dft)
             magnitude_spectrum_filter = 20 * np.log(np.abs(filterd_dft))
@@ -199,32 +205,27 @@ class FilterStudio(qtw.QWidget):
 
 
     def apply_laplacian_filter(self, MODE):
-
-
-
         gray_img= cv2.cvtColor(self.original_img, cv2.COLOR_BGR2GRAY)
-        filtered_img =  cv2.Laplacian(gray_img,cv2.CV_64F ,ksize =5)
+        kernal =self.kernal_spinbox.value()
+        kernal = kernal if kernal <31 else 31
+        kernal = kernal if kernal % 2 == 1 else kernal - 1
+        filtered_img =  cv2.Laplacian(gray_img,cv2.CV_64F ,ksize =kernal)
 
         laplacian_spectrum = np.log(np.abs(self.dft_gray) + 1)
          # filtered dft
         filterd_dft = np.fft.fft2(filtered_img)
         filterd_dft = np.fft.fftshift(filterd_dft)
         laplacian_spectrum_filtered = 20 * np.log(np.abs(filterd_dft) + 1)
-
-
-
         self.draw(laplacian_spectrum,laplacian_spectrum_filtered,self.original_img,filtered_img)
 
 
 
 
     def draw(self,spectrum,filtered_spectrum,original_image,filtered_image):
-
-
         self.dft_image.draw_image(spectrum)
         self.filtered_dft.draw_image(filtered_spectrum)
-
         self.original_image.draw_image(original_image)
-
-
         self.filtered_image.draw_image(filtered_image)
+
+    def apply_kernal(self):
+        self.image_transformation()
