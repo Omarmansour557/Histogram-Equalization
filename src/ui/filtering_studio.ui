@@ -23,7 +23,8 @@
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_2">
            <property name="styleSheet">
-            <string notr="true">font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
+            <string notr="true">font: 75 italic 13pt &quot;Ubuntu Condensed&quot;;
+</string>
            </property>
            <property name="text">
             <string>Original Image</string>
@@ -138,6 +139,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QComboBox" name="filters_list">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <item>
             <property name="text">
              <string>Low_Pass_Filter</string>
@@ -162,6 +166,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="modes_list">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <item>
             <property name="text">
              <string>GRAY</string>
@@ -180,6 +187,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QSpinBox" name="kernal_spinbox">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="maximum">
             <number>500</number>
            </property>
@@ -193,6 +203,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="kernal_btn">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(32, 74, 135);</string>
+           </property>
            <property name="text">
             <string>apply</string>
            </property>
