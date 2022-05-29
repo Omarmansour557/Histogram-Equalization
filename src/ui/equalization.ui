@@ -25,7 +25,7 @@
            <property name="styleSheet">
             <string notr="true">
 font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;
-color: rgb(204, 0, 0);</string>
+</string>
            </property>
            <property name="text">
             <string>Equalized Image</string>
@@ -52,7 +52,7 @@ color: rgb(204, 0, 0);</string>
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_4">
            <property name="styleSheet">
-            <string notr="true">color:rgb(78, 154, 6);
+            <string notr="true">
 
 font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
            </property>
@@ -109,7 +109,7 @@ font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
          <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="label_3">
            <property name="styleSheet">
-            <string notr="true">color:rgb(78, 154, 6);
+            <string notr="true">
 font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
            </property>
            <property name="text">
@@ -138,8 +138,12 @@ font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="histogram_btn">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(78, 154, 6);</string>
+          <string notr="true">background-color: rgb(92, 53, 102);
+</string>
          </property>
          <property name="text">
           <string>Show Histogram</string>
@@ -154,8 +158,12 @@ font: 75 italic 12pt &quot;Ubuntu Condensed&quot;;</string>
            <height>16777215</height>
           </size>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(204, 0, 0);</string>
+          <string notr="true">
+background-color: rgb(32, 74, 135);</string>
          </property>
          <property name="text">
           <string>Show Equalization</string>
