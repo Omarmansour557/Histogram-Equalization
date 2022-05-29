@@ -14,7 +14,7 @@
    <string>TabWidget</string>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>2</number>
   </property>
   <widget class="QWidget" name="Filtering">
    <attribute name="title">
@@ -33,6 +33,16 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="equalizer_layout"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="Bourder_trecing">
+   <attribute name="title">
+    <string>Page</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QVBoxLayout" name="Boarder_tracing_layout"/>
     </item>
    </layout>
   </widget>
